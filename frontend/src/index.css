@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Outfit:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --rb-green: #0f7a3e;
+  --rb-green-dark: #0a5a2c;
+  --rb-gold: #f4b400;
+  --rb-red: #c8102e;
+  --rb-blue: #1b3a8a;
+  --rb-cream: #f8f4ec;
+  --rb-ink: #0e1b14;
+  --rb-paper: #ffffff;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Outfit", system-ui, -apple-system, sans-serif;
+    background: var(--rb-paper);
+    color: var(--rb-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: "Fraunces", "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--rb-ink);
+  }
+  ::selection { background: var(--rb-gold); color: var(--rb-ink); }
+}
+
+@layer components {
+  .container-rb { @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-12; }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all duration-300;
+    background: var(--rb-green);
+    box-shadow: 0 6px 18px -4px rgba(15,122,62,0.45);
+  }
+  .btn-primary:hover { background: var(--rb-green-dark); transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(15,122,62,0.55); }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300;
+    background: var(--rb-gold); color: var(--rb-ink);
+    box-shadow: 0 6px 18px -4px rgba(244,180,0,0.45);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(244,180,0,0.6); }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 border-2;
+    border-color: var(--rb-ink); color: var(--rb-ink); background: transparent;
+  }
+  .btn-outline:hover { background: var(--rb-ink); color: #fff; }
+
+  .eyebrow { @apply uppercase tracking-[0.22em] text-xs font-semibold; color: var(--rb-green); }
+
+  .section { @apply py-20 sm:py-24 lg:py-28; }
+  .h-display { @apply text-5xl sm:text-6xl lg:text-7xl leading-[1.02]; font-family: "Fraunces", serif; }
+  .h-section { @apply text-3xl sm:text-4xl lg:text-5xl leading-tight; }
+}
+
+/* Subtle paper grain */
+.bg-grain {
+  background-color: var(--rb-cream);
+  background-image:
+    radial-gradient(rgba(15,27,20,0.05) 1px, transparent 1px),
+    radial-gradient(rgba(15,27,20,0.04) 1px, transparent 1px);
+  background-size: 32px 32px, 18px 18px;
+  background-position: 0 0, 8px 8px;
+}
+
+.hero-bg {
+  background:
+    radial-gradient(60% 70% at 80% 10%, rgba(244,180,0,0.18) 0%, transparent 60%),
+    radial-gradient(50% 60% at 10% 90%, rgba(15,122,62,0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, var(--rb-cream) 100%);
+}
+
+.flag-stripe {
+  background: linear-gradient(
+    90deg,
+    var(--rb-red) 0 25%,
+    var(--rb-gold) 25% 50%,
+    var(--rb-green) 50% 75%,
+    var(--rb-blue) 75% 100%
+  );
+}
+
+.card-rb {
+  @apply rounded-2xl bg-white border;
+  border-color: rgba(14,27,20,0.08);
+  box-shadow: 0 1px 2px rgba(14,27,20,0.04), 0 10px 30px -18px rgba(14,27,20,0.15);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.card-rb:hover { transform: translateY(-4px); box-shadow: 0 14px 40px -18px rgba(14,27,20,0.25); }
+
+.pillar-number {
+  font-family: "Fraunces", serif;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--rb-green) 0%, var(--rb-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animated underline link */
+.nav-link {
+  position: relative;
+  padding: 6px 2px;
+  color: var(--rb-ink);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.nav-link::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: var(--rb-green);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .35s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: left; }
+.nav-link.active { color: var(--rb-green); }
+
+img { max-width: 100%; display: block; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px);} to { opacity:1; transform: translateY(0);} }
+.fade-up { animation: fadeUp .7s ease both; }
